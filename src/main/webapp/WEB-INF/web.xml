@@ -6,7 +6,7 @@
 	version="3.0">
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:spring-mybatis.xml</param-value>
+		<param-value>classpath:spring-jpa.xml</param-value>
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -20,14 +20,6 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-	<servlet>
-		<servlet-name>ureportServlet</servlet-name>
-		<servlet-class>com.bstek.ureport.console.UReportServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ureportServlet</servlet-name>
-		<url-pattern>/ureport/*</url-pattern>
-	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Spring</servlet-name>
 		<url-pattern>/</url-pattern>
