@@ -176,44 +176,27 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-<!-- 
+
 	<pluginRepositories>
 		<pluginRepository>
-			<id>alfresco-public</id>
-			<url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
+			<id>tomcat8-plugin</id>
+			<url>https://artifacts.alfresco.com/nexus/content/repositories/public/</url>
 		</pluginRepository>
-		<pluginRepository>
-			<id>alfresco-public-snapshots</id>
-			<url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>daily</updatePolicy>
-			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
-			<id>beardedgeeks-releases</id>
-			<url>http://beardedgeeks.googlecode.com/svn/repository/releases</url>
-		</pluginRepository>
-	</pluginRepositories> -->
-	<pluginRepositories>
-<pluginRepository>
-<id>tomcat8-plugin</id>
-<url>https://artifacts.alfresco.com/nexus/content/repositories/public/</url>
-</pluginRepository>
-</pluginRepositories>
+	</pluginRepositories>
+
 	<build>
 		<plugins>
-		      <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat8-maven-plugin</artifactId>
-                <version>3.0-r1756463</version>
-                <configuration>
-                    <path>/</path>
-                    <port>8080</port>
-                    <url>http://localhost:8080/</url>
-                    <uriEncoding>UTF-8</uriEncoding>
-                </configuration>
-            </plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat8-maven-plugin</artifactId>
+				<version>3.0-r1756463</version>
+				<configuration>
+					<path>/springDemo</path>
+					<port>8080</port>
+					<url>http://localhost:8080/springDemo</url>
+					<uriEncoding>UTF-8</uriEncoding>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
