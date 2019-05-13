@@ -11,7 +11,12 @@
 
     <!-- 自动扫描base-package对应的路径或者该路径的子包下面的java文件，如果扫描到文件中带有@Service,@Component,@Repository,@Controller等这些spring注解的类，则把这些类注册为spring bean -->
     <context:component-scan base-package="com.ocloudwork.spring.demo"/>
-
+    <mvc:annotation-driven  />
+    <!-- <mvc:resources mapping="/images/**" location="/images/" />
+    <mvc:resources mapping="/demo/**" location="/demo/" />
+    <mvc:resources mapping="/css/**" location="/css/" />
+    <mvc:resources mapping="/js/**" location="/js/" /> -->
+    
     <!-- 完成请求和注解POJO的映射 -->
     <bean
             class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
@@ -42,41 +47,46 @@
     -->
 
 
-	<!-- 用于将对象转换为 JSON -->
-	<bean id="stringConverter"
-		class="org.springframework.http.converter.StringHttpMessageConverter">
-		<property name="supportedMediaTypes">
-			<list>
-				<value>text/plain;charset=UTF-8</value>
-				<value>text/json;charset=UTF-8</value>
-				<value>text/html;charset=UTF-8</value>
-				<value>application/json;charset=UTF-8</value>
-			</list>
-		</property>
-	</bean>
-	<bean id="jsonConverter"
-		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
-
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="messageConverters">
-			<list>
-				<ref bean="stringConverter" />
-				<ref bean="jsonConverter" />
-			</list>
-		</property>
-	</bean>  
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">  
+        <property name="messageConverters">  
+            <list>  
+                   <ref bean="mappingJacksonHttpMessageConverter" />  
+            </list>  
+        </property>  
+    </bean>  
+            
+    <bean id="mappingJacksonHttpMessageConverter"  
+        class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
+         <property name = "supportedMediaTypes">  
+              <list>  
+                <bean class="org.springframework.http.MediaType">  
+                 <constructor-arg index="0" value="text"/>  
+                 <constructor-arg index="1" value="plain"/>  
+                 <constructor-arg index="2" value="UTF-8"/>  
+                </bean>  
+                <bean class="org.springframework.http.MediaType">  
+                 <constructor-arg index="0" value="*"/>  
+                 <constructor-arg index="1" value="*"/>  
+                 <constructor-arg index="2" value="UTF-8"/>  
+                </bean>  
+                <bean class="org.springframework.http.MediaType">  
+                 <constructor-arg index="0" value="text"/>  
+                 <constructor-arg index="1" value="*"/>  
+                 <constructor-arg index="2" value="UTF-8"/>  
+                </bean>  
+                 <bean class="org.springframework.http.MediaType">  
+                 <constructor-arg index="0" value="application"/>  
+                 <constructor-arg index="1" value="json"/>  
+                 <constructor-arg index="2" value="UTF-8"/>  
+                </bean>  
+              </list>  
+        </property>  
+    </bean>   
 
     <!-- jsp页面解析器，当Controller返回XXX字符串时，先通过拦截器，然后该类就会在/WEB-INF/views/目录下，查找XXX.jsp文件 -->
     <bean
             class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/"></property>
         <property name="suffix" value=".jsp"></property>
-    </bean>
-
-    <!-- 多段文件上传 -->
-    <bean id="multipartResolver"
-          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="1073741824"/>
     </bean>
 </beans>

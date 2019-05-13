@@ -22,7 +22,7 @@ public class DemoController {
 	@Autowired
 	private DemoService demoService;
 
-	@RequestMapping(path = "/listDemo", produces = "text/html;charset=UTF-8")
+	@RequestMapping(path = "/listDemo")
 	public @ResponseBody List<DemoVO> listDemo() {
 		List<DemoVO> demoVOList = new ArrayList<DemoVO>();
 		List<DemoBO> demoBOList = demoService.listAll();
