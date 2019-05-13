@@ -22,7 +22,7 @@ public class DemoController {
 	@Autowired
 	private DemoService demoService;
 
-	@RequestMapping(path = "/listDemo")
+	@GetMapping(path = "/listDemo")
 	public @ResponseBody List<DemoVO> listDemo() {
 		List<DemoVO> demoVOList = new ArrayList<DemoVO>();
 		List<DemoBO> demoBOList = demoService.listAll();
