@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.ocloudwork.spring.demo.bo.DemoBO;
@@ -26,6 +29,16 @@ public class DemoServiceImpl implements DemoService {
 			demoBOList.add(modelMapper.map(demoPO, DemoBO.class));
 		});
 		return demoBOList;
+	}
+	
+	public Page<DemoBO> pageListDemo(Pageable pageable) {
+		Page<DemoPO> pageDemo=demoDao.findAll(pageable);
+		List<DemoBO> demoBOList = new ArrayList<DemoBO>();
+		pageDemo.getContent().stream().forEach(demoPO -> {
+			demoBOList.add(modelMapper.map(demoPO, DemoBO.class));
+		});
+		Page<DemoBO> pageDemoBO=new PageImpl<DemoBO>(demoBOList, pageable, pageDemo.getTotalElements());
+		return pageDemoBO;
 	}
 
 	public void saveDemo(DemoBO demoBO) {
