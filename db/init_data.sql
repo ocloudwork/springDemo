@@ -1,0 +1,1 @@
+insert into demo(id,createBy,createTime,updateBy,updateTime,demoName,demoInteger,demoLong,demoDouble,editTime,file,gender)values('1','minghui',sysdate(),'jingfeng',sysdate(),'测试demo',123,987654321,45.632,sysdate(),null,1);

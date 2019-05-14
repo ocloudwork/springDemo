@@ -7,8 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,18 +20,18 @@ public abstract class BasePO implements Serializable {
 	
 	@Id
 	@GeneratedValue(generator = "jpa-uuid")
-	private String id;
+	protected String id;
 
 	@Column
-	private String createBy;
+	protected String createBy;
 
 	@Column
-	private Date createTime;
+	protected Date createTime;
 
 	@Column
-	private String updateBy;
+	protected String updateBy;
 
 	@Column
-	private Date updateTime;
+	protected Date updateTime;
 
 }
