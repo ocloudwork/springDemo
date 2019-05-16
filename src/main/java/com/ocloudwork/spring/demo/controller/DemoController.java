@@ -20,7 +20,8 @@ import com.ocloudwork.spring.demo.service.DemoService;
 import com.ocloudwork.spring.demo.vo.DemoVO;
 
 @RestController
-public class DemoController {
+public class DemoController extends BaseController {
+
 	@Autowired
 	private ModelMapper modelMapper;
 
@@ -42,7 +43,7 @@ public class DemoController {
 	public Page<DemoVO> pageListDemo(@RequestParam("page") Integer page, @RequestParam("size") Integer size,
 			@RequestParam("sortType") String sortType, @RequestParam("sortableFields") String sortableFields) {
 
-		Sort sort = "ASC".equals(sortType) ? new Sort(Sort.Direction.ASC, sortableFields)
+		Sort sort = ASC.equals(sortType) ? new Sort(Sort.Direction.ASC, sortableFields)
 				: new Sort(Sort.Direction.DESC, sortableFields);
 		Pageable pageable = new PageRequest(page, size, sort);
 
@@ -62,12 +63,12 @@ public class DemoController {
 			@RequestParam("sortType") String sortType, @RequestParam("sortableFields") String sortableFields,
 			@RequestParam("id") String id) {
 
-		Sort sort = "ASC".equals(sortType) ? new Sort(Sort.Direction.ASC, sortableFields)
+		Sort sort = ASC.equals(sortType) ? new Sort(Sort.Direction.ASC, sortableFields)
 				: new Sort(Sort.Direction.DESC, sortableFields);
 		Pageable pageable = new PageRequest(page - 1, size, sort);
 
 		List<DemoVO> demoVOList = new ArrayList<DemoVO>();
-		Page<DemoBO> pageDemoBO = demoService.pageListDemo(pageable,id);
+		Page<DemoBO> pageDemoBO = demoService.pageListDemo(pageable, id);
 		pageDemoBO.getContent().stream().forEach(demoBO -> {
 			demoVOList.add(modelMapper.map(demoBO, DemoVO.class));
 		});
