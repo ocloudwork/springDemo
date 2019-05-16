@@ -14,4 +14,6 @@ public interface DemoService {
 	void saveDemo(DemoBO demoBO);
 	
 	Page<DemoBO> pageListDemo(Pageable pageable);
+
+	Page<DemoBO> pageListDemo(Pageable pageable, String id);
 }

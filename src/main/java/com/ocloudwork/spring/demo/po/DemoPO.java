@@ -47,5 +47,5 @@ public class DemoPO extends BasePO {
 	
 	@Enumerated(EnumType.ORDINAL)  
 	@Column(length=1,nullable=false)//枚举类型，且将值存入数据库
-	private Gender gender= Gender.UNKNOWN;
+	private Gender gender;
 }

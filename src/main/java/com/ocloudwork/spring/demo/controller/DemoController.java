@@ -36,23 +36,43 @@ public class DemoController {
 		});
 		return demoVOList;
 	}
-	
+
 	@GetMapping(path = "/pageListDemo")
-	public @ResponseBody Page<DemoVO> pageListDemo(@RequestParam("page") Integer page,
-	        @RequestParam("size") Integer size,
-	        @RequestParam("sortType") String sortType,
-	        @RequestParam("sortableFields") String sortableFields) {
-		
-		Sort sort = "ASC".equals(sortType) ? new Sort(Sort.Direction.ASC, sortableFields) : new Sort(Sort.Direction.DESC, sortableFields);
-		Pageable pageable = new PageRequest(page-1,size,sort);
-		
+	@ResponseBody
+	public Page<DemoVO> pageListDemo(@RequestParam("page") Integer page, @RequestParam("size") Integer size,
+			@RequestParam("sortType") String sortType, @RequestParam("sortableFields") String sortableFields) {
+
+		Sort sort = "ASC".equals(sortType) ? new Sort(Sort.Direction.ASC, sortableFields)
+				: new Sort(Sort.Direction.DESC, sortableFields);
+		Pageable pageable = new PageRequest(page, size, sort);
+
 		List<DemoVO> demoVOList = new ArrayList<DemoVO>();
 		Page<DemoBO> pageDemoBO = demoService.pageListDemo(pageable);
 		pageDemoBO.getContent().stream().forEach(demoBO -> {
 			demoVOList.add(modelMapper.map(demoBO, DemoVO.class));
 		});
-		
-		Page<DemoVO> pageDemoVO=new PageImpl<DemoVO>(demoVOList,pageable,pageDemoBO.getTotalElements());
+
+		Page<DemoVO> pageDemoVO = new PageImpl<DemoVO>(demoVOList, pageable, pageDemoBO.getTotalElements());
+		return pageDemoVO;
+	}
+
+	@GetMapping(path = "/pageListParasDemo")
+	@ResponseBody
+	public Page<DemoVO> pageListParasDemo(@RequestParam("page") Integer page, @RequestParam("size") Integer size,
+			@RequestParam("sortType") String sortType, @RequestParam("sortableFields") String sortableFields,
+			@RequestParam("id") String id) {
+
+		Sort sort = "ASC".equals(sortType) ? new Sort(Sort.Direction.ASC, sortableFields)
+				: new Sort(Sort.Direction.DESC, sortableFields);
+		Pageable pageable = new PageRequest(page - 1, size, sort);
+
+		List<DemoVO> demoVOList = new ArrayList<DemoVO>();
+		Page<DemoBO> pageDemoBO = demoService.pageListDemo(pageable,id);
+		pageDemoBO.getContent().stream().forEach(demoBO -> {
+			demoVOList.add(modelMapper.map(demoBO, DemoVO.class));
+		});
+
+		Page<DemoVO> pageDemoVO = new PageImpl<DemoVO>(demoVOList, pageable, pageDemoBO.getTotalElements());
 		return pageDemoVO;
 	}
 }
