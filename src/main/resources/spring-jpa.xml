@@ -26,7 +26,7 @@
 
 	<!-- 载入常用的配置 -->
 	<context:property-placeholder
-		location="classpath:jdbc.properties,classpath:druid.properties" />
+		location="classpath:ureport2.properties,classpath:jdbc.properties,classpath:druid.properties" />
 
 	<!-- spring启动时扫描项目路径下的properties文件,后续用${key }方式取出对应值,这样可以代码解耦和，后续只需修改properties文件即可 -->
 	<bean id="propertyPlaceholderConfigurer"
