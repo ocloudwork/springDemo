@@ -13,8 +13,8 @@ import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.ocloudwork.spring.demo.model.UUser;
 import com.ocloudwork.spring.demo.shiro.CustomShiroSessionDAO;
-import com.sojson.common.model.UUser;
 import com.sojson.common.utils.LoggerUtils;
 import com.sojson.common.utils.StringUtils;
 import com.sojson.user.bo.UserOnlineBo;

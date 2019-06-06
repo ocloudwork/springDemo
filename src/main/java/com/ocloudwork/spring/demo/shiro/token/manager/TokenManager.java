@@ -6,11 +6,11 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 
+import com.ocloudwork.spring.demo.model.UUser;
 import com.ocloudwork.spring.demo.shiro.session.CustomSessionManager;
 import com.ocloudwork.spring.demo.shiro.token.SampleRealm;
 import com.ocloudwork.spring.demo.shiro.token.ShiroToken;
-import com.sojson.common.model.UUser;
-import com.sojson.common.utils.SpringContextUtil;
+import com.ocloudwork.spring.demo.util.SpringContextUtil;
 
 
 

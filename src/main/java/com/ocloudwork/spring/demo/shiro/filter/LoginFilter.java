@@ -8,9 +8,9 @@ import javax.servlet.ServletResponse;
 
 import org.apache.shiro.web.filter.AccessControlFilter;
 
+import com.ocloudwork.spring.demo.model.UUser;
 import com.ocloudwork.spring.demo.shiro.token.manager.TokenManager;
-import com.sojson.common.model.UUser;
-import com.sojson.common.utils.LoggerUtils;
+import com.ocloudwork.spring.demo.util.LoggerUtils;
 /**
  * 
  * 开发公司：SOJSON在线工具 <p>

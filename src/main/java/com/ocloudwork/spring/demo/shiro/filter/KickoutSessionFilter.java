@@ -11,17 +11,17 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import net.sf.json.JSONObject;
-
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ocloudwork.spring.demo.shiro.cache.VCache;
 import com.ocloudwork.spring.demo.shiro.session.ShiroSessionRepository;
 import com.ocloudwork.spring.demo.shiro.token.manager.TokenManager;
-import com.sojson.common.utils.LoggerUtils;
+import com.ocloudwork.spring.demo.util.LoggerUtils;
+
 /**
  * 
  * 开发公司：SOJSON在线工具 <p>
@@ -150,7 +150,8 @@ public class KickoutSessionFilter extends AccessControlFilter {
 		try {
 			hresponse.setCharacterEncoding("UTF-8");
 			PrintWriter out = hresponse.getWriter();
-			out.println(JSONObject.fromObject(resultMap).toString());
+			ObjectMapper mapper = new ObjectMapper();
+			out.println(mapper.writeValueAsString(resultMap));
 			out.flush();
 			out.close();
 		} catch (Exception e) {
