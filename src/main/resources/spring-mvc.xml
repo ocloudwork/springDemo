@@ -13,84 +13,63 @@
 		bean -->
 	<context:component-scan
 		base-package="com.ocloudwork.spring.demo" />
-	<mvc:annotation-driven />
-	<!-- <mvc:resources mapping="/images/**" location="/images/" /> <mvc:resources 
-		mapping="/demo/**" location="/demo/" /> <mvc:resources mapping="/css/**" 
-		location="/css/" /> <mvc:resources mapping="/js/**" location="/js/" /> -->
+    <!-- 默认servlet -->
+    <mvc:default-servlet-handler />
+	<!-- 配置自定义转换服务器,启用注解驱动 -->
+	<bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	</bean>
+	<mvc:annotation-driven
+		conversion-service="conversionService">
+		<!-- 字符串转换器 -->
+		<mvc:message-converters
+			register-defaults="true">
+			<bean id="messageConverter"
+				class="org.springframework.http.converter.StringHttpMessageConverter">
+				<constructor-arg value="UTF-8" />
+			</bean>
+			<bean id="jsonHttpMesaageConverter"
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+		</mvc:message-converters>
+		<!-- 集合参数解析器 -->
+		<!--<mvc:argument-resolvers> -->
+		<!--</mvc:argument-resolvers> -->
+	</mvc:annotation-driven>
+	
+	 <!-- 配置国际化资源文件 -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="i18n" />
+    </bean>
+
+	<mvc:resources mapping="/images/**" location="/images/" />
+	<mvc:resources mapping="/css/**" location="/css/" />
+	<mvc:resources mapping="/js/**" location="/js/" />
 
 	<!-- 完成请求和注解POJO的映射 -->
 	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-	</bean>
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
 	</bean>
 
-	<!-- web请求的拦截器 <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/**" 
-		/> <mvc:exclude-mapping path="/register"/> <mvc:exclude-mapping path="/test/*"/> 
-		<mvc:exclude-mapping path="/login"/> <mvc:exclude-mapping path="/findPwd"/> 
-		<mvc:exclude-mapping path="/getTRegion"/> <mvc:exclude-mapping path="/getIndustry"/> 
-		<mvc:exclude-mapping path="/getTRegionByParentId"/> <mvc:exclude-mapping 
-		path="/getMessageCode"/> <mvc:exclude-mapping path="/listRecommend"/> <mvc:exclude-mapping 
-		path="/news/getNewsDetail"/> <mvc:exclude-mapping path="/css/ceos.css"/> 
-		<bean class="cn.kiiwii.framework.interceptor.MyInterceptor"></bean> </mvc:interceptor> 
-		</mvc:interceptors> -->
-
-
-	<bean
-		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-		<property name="messageConverters">
-			<list>
-				<ref bean="mappingJacksonHttpMessageConverter" />
-			</list>
-		</property>
-	</bean>
-
-	<bean id="mappingJacksonHttpMessageConverter"
-		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-		<property name="supportedMediaTypes">
-			<list>
-				<bean class="org.springframework.http.MediaType">
-					<constructor-arg index="0" value="text" />
-					<constructor-arg index="1" value="plain" />
-					<constructor-arg index="2" value="UTF-8" />
-				</bean>
-				<bean class="org.springframework.http.MediaType">
-					<constructor-arg index="0" value="*" />
-					<constructor-arg index="1" value="*" />
-					<constructor-arg index="2" value="UTF-8" />
-				</bean>
-				<bean class="org.springframework.http.MediaType">
-					<constructor-arg index="0" value="text" />
-					<constructor-arg index="1" value="*" />
-					<constructor-arg index="2" value="UTF-8" />
-				</bean>
-				<bean class="org.springframework.http.MediaType">
-					<constructor-arg index="0" value="application" />
-					<constructor-arg index="1" value="json" />
-					<constructor-arg index="2" value="UTF-8" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<!-- 标准方言 -->
+	<!-- 模板解析器 -->
 	<bean id="templateResolver"
-		class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+		class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
 		<property name="prefix" value="/WEB-INF/templates/" />
 		<property name="suffix" value=".html" />
+		<property name="templateMode" value="HTML5" />
+		<property name="cacheable" value="false" />
+		<property name="characterEncoding" value="UTF-8" />
 	</bean>
+
 	<bean id="templateEngine"
 		class="org.thymeleaf.spring4.SpringTemplateEngine">
 		<property name="templateResolver" ref="templateResolver" />
 	</bean>
-	<!-- Thymeleaf视图解析器的配置 -->
+
 	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
 		<property name="templateEngine" ref="templateEngine" />
-		<property name="order" value="1" />
-		<property name="viewNames" value="*.html,*.xhtml" />
+		<property name="characterEncoding" value="UTF-8" /><!-- 中文乱码问题 -->
 	</bean>
-    <!-- 定义一个View的bean并设置一些静态变量 -->
+	<!-- 定义一个View的bean并设置一些静态变量 -->
 	<bean name="main" class="org.thymeleaf.spring4.view.ThymeleafView">
 		<property name="staticVariables">
 			<map>
@@ -98,4 +77,8 @@
 			</map>
 		</property>
 	</bean>
+
+	<!-- 配置上传文件所需的解析器 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 </beans>

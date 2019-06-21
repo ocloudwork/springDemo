@@ -62,9 +62,6 @@
 	<session-config>
 		<session-timeout>30</session-timeout>
 	</session-config>
-	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-	</welcome-file-list>
 	<mime-mapping>
 		<extension>zip</extension>
 		<mime-type>application/zip</mime-type>
