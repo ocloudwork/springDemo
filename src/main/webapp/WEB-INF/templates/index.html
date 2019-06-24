@@ -1,7 +1,32 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" >
-<body>
-<h2>spring demo 项目</h2>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="my spring demo" />
+<meta name="author" content="zhaominghui" />
 
+<title>my spring demo</title>
+
+<link th:href="@{/static/bootstrap-3.3.7-dist/css/bootstrap.min.css}"
+	rel="stylesheet" />
+</head>
+<body>
+	<h2>spring demo 项目</h2>
+    <p>点击隐藏p段落</p>
+	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+	<script th:src="@{/static/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			//点击隐藏p段落
+			$("p").click(function() {
+				$(this).hide();
+			});
+		});
+	</script>
 </body>
 </html>
