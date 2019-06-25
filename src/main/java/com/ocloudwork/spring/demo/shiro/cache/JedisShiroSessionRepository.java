@@ -8,8 +8,9 @@ import org.apache.shiro.session.Session;
 import com.ocloudwork.spring.demo.shiro.session.CustomSessionManager;
 import com.ocloudwork.spring.demo.shiro.session.SessionStatus;
 import com.ocloudwork.spring.demo.shiro.session.ShiroSessionRepository;
-import com.sojson.common.utils.LoggerUtils;
-import com.sojson.common.utils.SerializeUtil;
+import com.ocloudwork.spring.demo.util.LoggerUtils;
+import com.ocloudwork.spring.demo.util.SerializeUtil;
+
 /**
  * Session 管理
  * @author sojson.com

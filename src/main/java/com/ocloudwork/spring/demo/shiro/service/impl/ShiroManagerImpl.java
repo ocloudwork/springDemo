@@ -13,9 +13,10 @@ import org.apache.shiro.web.servlet.AbstractShiroFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 
+import com.ocloudwork.spring.demo.configuration.INI4j;
 import com.ocloudwork.spring.demo.shiro.service.ShiroManager;
-import com.sojson.common.utils.LoggerUtils;
-import com.sojson.core.config.INI4j;
+import com.ocloudwork.spring.demo.util.LoggerUtils;
+
 /**
  * 
  * 开发公司：SOJSON在线工具 <p>

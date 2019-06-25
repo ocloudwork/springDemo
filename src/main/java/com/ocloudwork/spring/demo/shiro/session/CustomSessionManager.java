@@ -11,13 +11,13 @@ import java.util.Set;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.support.DefaultSubjectContext;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import com.ocloudwork.spring.demo.bo.UserOnlineBo;
 import com.ocloudwork.spring.demo.model.UUser;
 import com.ocloudwork.spring.demo.shiro.CustomShiroSessionDAO;
-import com.sojson.common.utils.LoggerUtils;
-import com.sojson.common.utils.StringUtils;
-import com.sojson.user.bo.UserOnlineBo;
+import com.ocloudwork.spring.demo.util.LoggerUtils;
+import com.ocloudwork.spring.demo.util.StringUtils;
+
 /**
  * 
  * 开发公司：SOJSON在线工具 <p>

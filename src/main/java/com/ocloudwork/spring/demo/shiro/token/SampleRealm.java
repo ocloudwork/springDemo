@@ -18,10 +18,11 @@ import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ocloudwork.spring.demo.model.UUser;
+import com.ocloudwork.spring.demo.service.PermissionService;
+import com.ocloudwork.spring.demo.service.RoleService;
+import com.ocloudwork.spring.demo.service.UUserService;
 import com.ocloudwork.spring.demo.shiro.token.manager.TokenManager;
-import com.sojson.permission.service.PermissionService;
-import com.sojson.permission.service.RoleService;
-import com.sojson.user.service.UUserService;
+
 
 
 /**

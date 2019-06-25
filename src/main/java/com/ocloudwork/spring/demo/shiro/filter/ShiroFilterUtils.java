@@ -8,9 +8,10 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import com.sojson.common.utils.LoggerUtils;
+import com.ocloudwork.spring.demo.util.LoggerUtils;
 
 import net.sf.json.JSONObject;
+
 
 /**
  * 
