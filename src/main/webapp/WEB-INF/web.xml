@@ -6,7 +6,7 @@
 	version="3.0">
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:spring-jpa.xml,classpath:ureport-console-context.xml</param-value>
+		<param-value>classpath:spring.xml,classpath:spring-jpa.xml</param-value>
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -24,14 +24,7 @@
         <servlet-name>Spring</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-	<servlet>
-		<servlet-name>ureportServlet</servlet-name>
-		<servlet-class>com.bstek.ureport.console.UReportServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ureportServlet</servlet-name>
-		<url-pattern>/ureport/*</url-pattern>
-	</servlet-mapping>
+    
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
