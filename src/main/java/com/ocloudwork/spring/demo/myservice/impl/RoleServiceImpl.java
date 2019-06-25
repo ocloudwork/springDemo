@@ -1,4 +1,4 @@
-package com.ocloudwork.spring.demo.service.impl;
+package com.ocloudwork.spring.demo.myservice.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +16,7 @@ import com.ocloudwork.spring.demo.mybatis.dao.URoleMapper;
 import com.ocloudwork.spring.demo.mybatis.dao.URolePermissionMapper;
 import com.ocloudwork.spring.demo.mybatis.dao.UUserMapper;
 import com.ocloudwork.spring.demo.mybatis.page.Pagination;
-import com.ocloudwork.spring.demo.service.RoleService;
+import com.ocloudwork.spring.demo.myservice.RoleService;
 import com.ocloudwork.spring.demo.shiro.token.manager.TokenManager;
 import com.ocloudwork.spring.demo.util.LoggerUtils;
 

@@ -1,4 +1,4 @@
-package com.ocloudwork.spring.demo.service;
+package com.ocloudwork.spring.demo.myservice;
 
 import java.util.List;
 import java.util.Map;
