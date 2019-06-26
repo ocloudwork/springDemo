@@ -28,7 +28,6 @@
 			<list>
 				<value>classpath:jdbc.properties</value>
 				<value>classpath:druid.properties</value>
-				<value>classpath:shiro-config.properties</value>
 			</list>
 		</property>
 	</bean>
