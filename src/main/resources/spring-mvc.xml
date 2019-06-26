@@ -3,10 +3,12 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
     	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
     	">
 
 	<!-- 自动扫描base-package对应的路径或者该路径的子包下面的java文件，如果扫描到文件中带有@Service,@Component,@Repository,@Controller等这些spring注解的类，则把这些类注册为spring 
@@ -15,6 +17,8 @@
 		base-package="com.ocloudwork.spring.demo" />
     <!-- 默认servlet -->
     <mvc:default-servlet-handler />
+    <!-- 启动对@AspectJ（面向切面）注解的支持 -->
+    <aop:aspectj-autoproxy />
 	<!-- 配置自定义转换服务器,启用注解驱动 -->
 	<bean id="conversionService"
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
