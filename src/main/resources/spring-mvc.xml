@@ -23,8 +23,17 @@
 	<bean id="conversionService"
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 	</bean>
+	 <!--
+        Setup a simple strategy: 
+           1. Take all the defaults.
+           2. Return json by default when not sure. 
+       
+	<bean id="contentNegotiationManager"
+		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+		<property name="defaultContentType" value="application/json" />
+	</bean>-->
 	<mvc:annotation-driven
-		conversion-service="conversionService">
+		conversion-service="conversionService" >
 		<!-- 字符串转换器 -->
 		<mvc:message-converters
 			register-defaults="true">
