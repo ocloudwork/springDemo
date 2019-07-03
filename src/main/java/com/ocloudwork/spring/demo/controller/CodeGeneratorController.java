@@ -12,11 +12,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.base.CaseFormat;
 import com.ocloudwork.spring.demo.bo.CodeTemplateBO;
 import com.ocloudwork.spring.demo.service.CodeTemplateService;
+import com.ocloudwork.spring.demo.service.impl.ModelAndMapperGenerator;
 
 import freemarker.core.ParseException;
 import freemarker.template.Configuration;
@@ -25,21 +27,27 @@ import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 import freemarker.template.TemplateNotFoundException;
 
-@Controller(value = "/codeGenerator")
+@Controller
+@RequestMapping("/codeGenerator")
 public class CodeGeneratorController extends BaseController{
 	
 	// 项目在硬盘上的基础路径
-	@Value(value = "${project.path}")
 	private String projectPath = System.getProperty("user.dir");
 	
-	@Value(value = "${template.file.path}")
+	@Value("${work.path}")
+	private String workPath;
+	
+	@Value("${template.file.path}")
 	private String templateFilePath;
 	
-	@Value(value = "${base.package}")
+	@Value("${base.package}")
 	private String basePackage;
 	
 	@Autowired
 	private CodeTemplateService codeTemplateService;
+	
+	@Autowired
+	private ModelAndMapperGenerator modelAndMapperGenerator;
 	
 	@GetMapping(path = "/make/{tableId}")
 	public @ResponseBody boolean make(@PathVariable String tableId) throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, TemplateException, IOException {
@@ -56,14 +64,15 @@ public class CodeGeneratorController extends BaseController{
 		for (CodeTemplateBO codeTemplateBO : codeTemplateList) {
 			data.put("packageType", codeTemplateBO.getPackageType());
 			//获取包转换文件路径
-			File serviceFile = new File(projectPath + codeTemplateBO.getCodeFilePath()+ codeTemplateBO.getCodeFileName());
+			File serviceFile = new File(workPath + codeTemplateBO.getCodeFilePath()+ codeTemplateBO.getCodeFileName());
 			// 查看父级目录是否存在, 不存在则创建
 			if (!serviceFile.getParentFile().exists()) {
 				serviceFile.getParentFile().mkdirs();
 			}
 			cfg.getTemplate(codeTemplateBO.getTemplateAlias()).process(data, new FileWriter(serviceFile));
 		}
-		return false;
+		modelAndMapperGenerator.genCode(tableName);
+		return true;
 	}
 	
 	private String getTableName(String tableId) {
@@ -94,7 +103,7 @@ public class CodeGeneratorController extends BaseController{
 		Configuration cfg = null;
 		try {
 			cfg = new Configuration(Configuration.VERSION_2_3_28);
-			cfg.setDirectoryForTemplateLoading(new File(templateFilePath));
+			cfg.setDirectoryForTemplateLoading(new File(projectPath+templateFilePath));
 			cfg.setDefaultEncoding("UTF-8");
 			cfg.setTemplateExceptionHandler(TemplateExceptionHandler.IGNORE_HANDLER);
 		} catch (IOException e) {
