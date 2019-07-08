@@ -15,6 +15,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<checkstyle.config.location>full_checkstyle.xml</checkstyle.config.location>
+
 		<spring.version>4.3.24.RELEASE</spring.version>
 	</properties>
 
@@ -36,10 +38,10 @@
 		</dependency>
 		<!-- Spring -->
 		<dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
@@ -233,73 +235,138 @@
 				<version>3.2.2</version>
 			</plugin>
 			<plugin>
-				<!-- 运行：mvn project-info-reports:dependencies   依赖报告(target/site/dependencies.html) -->
+				<!-- 项目总报告 运行：mvn project-info-reports:dependencies 依赖报告(target/site/dependencies.html) -->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
 				<version>3.0.0</version>
 			</plugin>
 			<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.7.1</version>
-            </plugin>
-			<!-- 编码规约扫描命令： mvn pmd:pmd   报告(target/site/pmd.html)-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.12.0</version>
-                <configuration>
-                    <rulesets>
-                        <ruleset>rulesets/java/ali-comment.xml</ruleset>
-                        <ruleset>rulesets/java/ali-concurrent.xml</ruleset>
-                        <ruleset>rulesets/java/ali-constant.xml</ruleset>
-                        <ruleset>rulesets/java/ali-exception.xml</ruleset>
-                        <ruleset>rulesets/java/ali-flowcontrol.xml</ruleset>
-                        <ruleset>rulesets/java/ali-naming.xml</ruleset>
-                        <ruleset>rulesets/java/ali-oop.xml</ruleset>
-                        <ruleset>rulesets/java/ali-orm.xml</ruleset>
-                        <ruleset>rulesets/java/ali-other.xml</ruleset>
-                        <ruleset>rulesets/java/ali-set.xml</ruleset>
-                    </rulesets>
-                    <printFailingErrors>true</printFailingErrors>
-                </configuration>
-                <executions>
-                    <!-- 绑定pmd:check到verify生命周期 -->
-                    <execution>
-                        <id>pmd-check-verify</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                    <!-- 绑定pmd:pmd到site生命周期 -->
-                    <execution>
-                        <id>pmd-pmd-site</id>
-                        <phase>site</phase>
-                        <goals>
-                            <goal>pmd</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <!-- p3c依赖 -->
-                <dependencies>
-                    <dependency>
-                        <groupId>com.alibaba.p3c</groupId>
-					    <artifactId>p3c-pmd</artifactId>
-					    <version>2.0.0</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.7.1</version>
+			</plugin>
+			<!-- 编码规约扫描命令： mvn pmd:pmd 报告(target/site/pmd.html) -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.12.0</version>
+				<configuration>
+					<rulesets>
+						<ruleset>rulesets/java/ali-comment.xml</ruleset>
+						<ruleset>rulesets/java/ali-concurrent.xml</ruleset>
+						<ruleset>rulesets/java/ali-constant.xml</ruleset>
+						<ruleset>rulesets/java/ali-exception.xml</ruleset>
+						<ruleset>rulesets/java/ali-flowcontrol.xml</ruleset>
+						<ruleset>rulesets/java/ali-naming.xml</ruleset>
+						<ruleset>rulesets/java/ali-oop.xml</ruleset>
+						<ruleset>rulesets/java/ali-orm.xml</ruleset>
+						<ruleset>rulesets/java/ali-other.xml</ruleset>
+						<ruleset>rulesets/java/ali-set.xml</ruleset>
+					</rulesets>
+					<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
+					<targetJdk>${java.version}</targetJdk>
+					<printFailingErrors>true</printFailingErrors>
+				</configuration>
+				<executions>
+					<!-- 绑定pmd:check到verify生命周期 -->
+					<execution>
+						<id>pmd-check-verify</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+					<!-- 绑定pmd:pmd到site生命周期 -->
+					<execution>
+						<id>pmd-pmd-site</id>
+						<phase>site</phase>
+						<goals>
+							<goal>pmd</goal>
+						</goals>
+					</execution>
+				</executions>
+				<!-- p3c依赖 -->
+				<dependencies>
+					<dependency>
+						<groupId>com.alibaba.p3c</groupId>
+						<artifactId>p3c-pmd</artifactId>
+						<version>2.0.0</version>
+					</dependency>
+				</dependencies>
+			</plugin>
 		</plugins>
 	</build>
 	<!-- 用于生成错误到代码内容的链接 -->
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jxr-plugin</artifactId>
-                <version>3.0.0</version>
-            </plugin>
-        </plugins>
-    </reporting>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>3.0.0</version>
+			</plugin>
+			<!-- 检测代码风格的插件 checkstyle（要在项目根目录下配置规则文件checkstyle.xml），然后使用mvn checkstyle:checkstyle命令生成报告 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.1.0</version>
+			</plugin>
+			<!-- findbugs插件 ：静态检查代码的错误 mvn findbugs:check mvn findbugs:gui -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>3.0.5</version>
+				<configuration>
+					<!-- 设置分析工作的等级，可以为Min、Default和Max -->
+					<effort>Low</effort>
+					<!-- Low、Medium和High (Low最严格) -->
+					<threshold>Medium</threshold>
+					<failOnError>true</failOnError>
+					<includeTests>true</includeTests>
+					<!--findbugs需要忽略的错误的配置文件 -->
+					<!-- <excludeFilterFile>compile.bat</excludeFilterFile> -->
+				</configuration>
+			</plugin>
+			<!--检测代码覆盖率的插件 jacoco -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.4</version>
+				<!-- Configuration 里面写配置信息 -->
+				<configuration>
+					<!-- rules里面指定覆盖规则 -->
+					<rules>
+						<rule implementation="org.jacoco.maven.RuleConfiguration">
+							<element>BUNDLE</element>
+							<limits>
+								<!-- 指定方法覆盖到80% -->
+								<limit implementation="org.jacoco.report.check.Limit">
+									<counter>METHOD</counter>
+									<value>COVEREDRATIO</value>
+									<minimum>0.50</minimum>  <!--注意：这里的数值都是百分比，只能写0-1之间的值，例如：0.8 -->
+								</limit>
+								<!-- 指定指令覆盖到40% -->
+								<limit implementation="org.jacoco.report.check.Limit">
+									<counter>INSTRUCTION</counter>
+									<value>COVEREDRATIO</value>
+									<minimum>0.40</minimum>
+								</limit>
+								<!-- 指定行覆盖到40% -->
+								<limit implementation="org.jacoco.report.check.Limit">
+									<counter>LINE</counter>
+									<value>COVEREDRATIO</value>
+									<minimum>0.40</minimum>
+								</limit>
+								<!-- 指定类覆盖到100%，不能遗失任何类 -->
+								<limit implementation="org.jacoco.report.check.Limit">
+									<counter>CLASS</counter>
+									<value>MISSEDCOUNT</value>
+									<maximum>0</maximum>
+								</limit>
+							</limits>
+						</rule>
+					</rules>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
 </project>
