@@ -15,20 +15,22 @@
 			<outputDirectory>bin</outputDirectory>
 		</fileSet>
 		<!-- 将项目中src/main/resources目录下的资源文件copy到target目录的conf目录下 -->
+		<!-- 
 		<fileSet>
 			<directory>src/main/resources</directory>
 			<outputDirectory>conf</outputDirectory>
-			<!-- 过滤资源文件，对其中的maven变量进行复制 -->
 			<filtered>true</filtered>
 		</fileSet>
+		 -->
 	</fileSets>
 	<!-- 指定依赖jar包输出的目录 -->
+	<!-- 
 	<dependencySets>
 		<dependencySet>
 			<useProjectArtifact>true</useProjectArtifact>
 			<outputDirectory>lib</outputDirectory>
-			<!-- 只包含runtime作用域的依赖 -->
 			<scope>runtime</scope>
 		</dependencySet>
 	</dependencySets>
+	-->
 </assembly>
