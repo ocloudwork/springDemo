@@ -1,0 +1,1 @@
+sudo docker build -t ocloudwork/springDemo:1.0 .
