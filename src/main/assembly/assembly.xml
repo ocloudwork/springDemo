@@ -15,16 +15,13 @@
 			<outputDirectory>bin</outputDirectory>
 		</fileSet>
 		<!-- 将项目中src/main/resources目录下的资源文件copy到target目录的conf目录下 -->
-		<!-- 
 		<fileSet>
 			<directory>src/main/resources</directory>
 			<outputDirectory>conf</outputDirectory>
 			<filtered>true</filtered>
 		</fileSet>
-		 -->
 	</fileSets>
 	<!-- 指定依赖jar包输出的目录 -->
-	<!-- 
 	<dependencySets>
 		<dependencySet>
 			<useProjectArtifact>true</useProjectArtifact>
@@ -32,5 +29,4 @@
 			<scope>runtime</scope>
 		</dependencySet>
 	</dependencySets>
-	-->
 </assembly>
