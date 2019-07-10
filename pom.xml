@@ -213,18 +213,15 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>9.4.19.v20190610</version>
 				<configuration>
+				    <!-- 扫描进行热部署的间隔时间,单位s -->
 					<scanIntervalSeconds>10</scanIntervalSeconds>
-					<stopPort>9999</stopPort>
 					<webApp>
 						<contextPath>/springDemo</contextPath>
 					</webApp>
-					<connectors>
-						<connector
-							implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-							<port>9080</port>
-							<maxIdleTime>60000</maxIdleTime>
-						</connector>
-					</connectors>
+					<httpConnector>
+				        <port>8888</port>
+				        <host>localhost</host>
+				    </httpConnector>
 				</configuration>
 			</plugin>
 			<plugin>
