@@ -9,12 +9,16 @@ import javax.persistence.MappedSuperclass;
 
 import com.ocloudwork.spring.demo.common.Base;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @MappedSuperclass
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class BasePO implements Base {
 
 	private static final long serialVersionUID = 1L;
