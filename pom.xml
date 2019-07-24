@@ -10,6 +10,64 @@
 
 	<name>springDemo</name>
 	<url>http://www.ocloudwork.com</url>
+	<description> A spring demo project.</description>
+
+	<!-- 描述了这个项目构建环境中的前提条件。 -->
+	<prerequisites>
+		<!-- 构建该项目或使用该插件所需要的Maven的最低版本 -->
+		<maven>3.6.0</maven>
+	</prerequisites>
+
+	<!-- 项目的问题管理系统(Bugzilla(开源), Jira, Scarab,或任何你喜欢的问题管理系统)的名称和URL，本例为 Bugzilla -->
+	<issueManagement>
+		<!-- 问题管理系统（例如Bugzilla）的名字， -->
+		<system>Bugzilla</system>
+		<!-- 该项目使用的问题管理系统的URL -->
+		<url>http://www.ocloudwork.com/bugzilla</url>
+	</issueManagement>
+
+	<!-- 项目持续集成信息 -->
+	<ciManagement>
+		<!-- 持续集成系统的名字，例如continuum -->
+		<system>jenkins</system>
+		<!-- 该项目使用的持续集成系统的URL（如果持续集成系统有web接口的话）。 -->
+		<url>http://www.ocloudwork.com/jenkins</url>
+		<!-- 构建完成时，需要通知的开发者/用户的配置项。包括被通知者信息和通知条件（错误，失败，成功，警告） -->
+		<notifiers>
+			<!-- 配置一种方式，当构建中断时，以该方式通知用户/开发者 -->
+			<notifier>
+				<!-- 传送通知的途径 -->
+				<type>mail</type>
+				<!-- 发生错误时是否通知 -->
+				<sendOnError>true</sendOnError>
+				<!-- 构建失败时是否通知 -->
+				<sendOnFailure>true</sendOnFailure>
+				<!-- 构建成功时是否通知 -->
+				<sendOnSuccess>true</sendOnSuccess>
+				<!-- 发生警告时是否通知 -->
+				<sendOnWarning>true</sendOnWarning>
+				<!-- 不赞成使用。通知发送到哪里 -->
+				<address>342015908@qq.com</address>
+			</notifier>
+		</notifiers>
+	</ciManagement>
+	<inceptionYear>2018</inceptionYear>
+	<!-- 项目相关邮件列表信息 -->
+	<mailingLists>
+		<!-- 该元素描述了项目相关的所有邮件列表。自动产生的网站引用这些信息。 -->
+		<mailingList>
+			<!-- 邮件的名称 -->
+			<name>test</name>
+			<!-- 发送邮件的地址或链接，如果是邮件地址，创建文档时，mailto: 链接会被自动创建 -->
+			<post>342015908@qq.com</post>
+			<!-- 订阅邮件的地址或链接，如果是邮件地址，创建文档时，mailto: 链接会被自动创建 -->
+			<subscribe>342015908@qq.com</subscribe>
+			<!-- 取消订阅邮件的地址或链接，如果是邮件地址，创建文档时，mailto: 链接会被自动创建 -->
+			<unsubscribe>342015908@qq.com</unsubscribe>
+			<!-- 你可以浏览邮件信息的URL -->
+			<archive>http://www.ocloudwork.com/mail</archive>
+		</mailingList>
+	</mailingLists>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -213,15 +271,15 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>9.4.19.v20190610</version>
 				<configuration>
-				    <!-- 扫描进行热部署的间隔时间,单位s -->
+					<!-- 扫描进行热部署的间隔时间,单位s -->
 					<scanIntervalSeconds>10</scanIntervalSeconds>
 					<webApp>
 						<contextPath>/springDemo</contextPath>
 					</webApp>
 					<httpConnector>
-				        <port>8888</port>
-				        <host>localhost</host>
-				    </httpConnector>
+						<port>8888</port>
+						<host>localhost</host>
+					</httpConnector>
 				</configuration>
 			</plugin>
 			<plugin>
