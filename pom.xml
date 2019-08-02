@@ -74,6 +74,8 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<checkstyle.config.location>full_checkstyle.xml</checkstyle.config.location>
+		<!-- 自定义默认的时间格式 年-月-日-时-分 -->
+        <maven.build.timestamp.format>yyyy-MM-dd_HH_mm_ss</maven.build.timestamp.format> 
 
 		<spring.version>4.3.24.RELEASE</spring.version>
 	</properties>
@@ -253,6 +255,7 @@
 	</pluginRepositories>
 
 	<build>
+	    <finalName>${project.artifactId}-${maven.build.timestamp}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
