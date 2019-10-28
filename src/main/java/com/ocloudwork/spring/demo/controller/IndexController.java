@@ -10,4 +10,9 @@ public class IndexController {
 	public String index() {
 		return "index";
 	}
+	
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String index2() {
+		return "websocket_index";
+	}
 }

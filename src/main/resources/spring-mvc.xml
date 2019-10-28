@@ -80,7 +80,7 @@
 		class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
 		<property name="prefix" value="/WEB-INF/templates/" />
 		<property name="suffix" value=".html" />
-		<property name="templateMode" value="HTML5" />
+		<property name="templateMode" value="HTML" />
 		<property name="cacheable" value="false" />
 		<property name="characterEncoding" value="UTF-8" />
 	</bean>
@@ -106,4 +106,5 @@
 	<!-- 配置上传文件所需的解析器 -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+	<import resource="classpath:spring-websocket.xml"/>
 </beans>
